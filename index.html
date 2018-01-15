@@ -185,6 +185,8 @@ function renderField(ctx, field, x0, y0, z0, x1, y1, z1, dx, dy, dz) {
 
 var world = new Array();
 var worldOnce = false;
+var needRenderField = false;
+	
 
 /**** world selectors ****/
 function world1() {
@@ -274,7 +276,7 @@ function dteMain() {
 
  var scax = 35;
  var scay = 35;
- if ((renderFieldClock -= timePassed) <= 0) {
+ if (needRenderField && (renderFieldClock -= timePassed) <= 0) {
   renderField(ctx, getFieldAt, -scax, -scay, 0, scax, scay, 0, 5, 5, 100);
   renderFieldClock = renderFieldInterval;
  }
