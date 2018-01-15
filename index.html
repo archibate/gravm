@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+  </head>
+  <body>
+    
+    <h1>引力数值模拟</h1>
+    
+    <p>我儿子又在看我编程了</p>
+	    
+    <canvas id="box" width="400" height="400" style="border: 1px solid #000000">
+		  您的浏览器未支持HTML5 canvas控件
+    </canvas>
+    
+    <script>
+function Vector(x, y, z) {
+ this.x = x;
+ this.y = y;
+ this.z = z;
+}
+
+Vector.prototype = {
+ copy: function() {
+  return new Vector(this.x, this.y, this.z);
+ },
+ negate: function() {
+  return new Vector(-this.x, -this.y, -this.z);
+ },
+ add: function(other) {
+  return new Vector(this.x + other.x, this.y + other.y, this.z + other.z);
+ },
+ subtract: function(other) {
+  return new Vector(this.x - other.x, this.y - other.y, this.z - other.z);
+ },
+ multiply: function(other) {
+  return new Vector(this.x * other, this.y * other, this.z * other);
+ },
+ divide: function(other) {
+  return new Vector(this.x / other, this.y / other, this.z / other);
+ },
+ negateUp: function(other) {
+  this.x = -this.x;
+  this.y = -this.y;
+  this.z = -this.z;
+  return this;
+ },
+ addUp: function(other) {
+  this.x += other.x;
+  this.y += other.y;
+  this.z += other.z;
+  return this;
+ },
+ subtractUp: function(other) {
+  this.x -= other.x;
+  this.y -= other.y;
+  this.z -= other.z;
+  return this;
+ },
+ multiplyUp: function(other) {
+  this.x *= other;
+  this.y *= other;
+  this.z *= other;
+  return this;
+ },
+ divideUp: function(other) {
+  this.x /= other;
+  this.y /= other;
+  this.z /= other;
+  return this;
+ },
+ dotProduct: function(other) {
+  return this.x * other.x + this.y * other.y + this.z * other.z;
+ },
+ crossProduct: function(other) {
+  return new Vector(this.y * other.z - this.z * other.y, this.z * other.x - this.x * other.z, this.x * other.y - this.y * other.x);
+ },
+ length: function() {
+  return Math.sqrt(dotProduct(this));
+ },
+ normalize: function() {
+  return divide(length());
+ },
+ normalizeUp: function() {
+  return divideUp(length());
+ },
+ toString: function() {
+  return '(' + this.x + ',' + this.y + ',' + this.z + ')';
+ },
+};
+
+function zeroVector() {
+ return new Vector(0, 0, 0);
+}
+
+</script><script>
+
+function Ball(position, velocity, mass) {
+ this.position = position;
+ this.velocity = velocity;
+ this.mass = mass;
+ mass = Math.abs(mass);
+ if (mass > 1)
+  mass = Math.log(mass);
+ else
+  mass = 0;
+ this.radius = 1 + 0.15 * mass * Math.sqrt(mass);
+}
+
+Ball.prototype = {
+ moveByTime: function(timePassed) {
+  this.position.addUp(this.velocity.multiply(timePassed));
+ },
+ accelerateByTime: function(timePassed, acceleration) {
+  this.velocity.addUp(acceleration.multiply(timePassed));
+ },
+};
+
+</script><script>
+
+function fillCircle(ctx, x, y, r) {
+ ctx.beginPath();
+ ctx.arc(x, y, r, 0, 2 * Math.PI);
+ ctx.fill();
+}
+
+function drawArrow(ctx, x0, y0, dx, dy) {
+ ctx.moveTo(x0, y0);
+ ctx.lineTo(x0 + dx, y0 + dy);
+ ctx.lineTo(x0 + 0.8 * dx - 0.2 * dy, y0 + 0.8 * dy + 0.2 * dx);
+ ctx.moveTo(x0 + dx, y0 + dy);
+ ctx.lineTo(x0 + 0.8 * dx + 0.2 * dy, y0 + 0.8 * dy - 0.2 * dx);
+ ctx.stroke();
+}
+
+</script><script>
+
+var box = document.getElementById('box');
+var ctx = box.getContext('2d');
+
+var screenX = box.width;
+var screenY = box.height;
+
+var screenScale = {x: box.height / 80, y: -box.width / 80};
+
+function screenOrtho(position) {
+ var x = position.x * screenScale.x + screenX / 2;
+ var y = position.y * screenScale.y + screenY / 2;
+ return {x: x, y: y};
+}
+
+Ball.prototype.render = function(ctx) {
+ var xy = screenOrtho(this.position);
+ ctx.fillStyle = '#FF8800';
+ ctx.strokeStyle = '#AA5500';
+ var radius = this.radius;
+ fillCircle(ctx, xy.x, xy.y, radius);
+}
+
+function renderField(ctx, field, x0, y0, z0, x1, y1, z1, dx, dy, dz) {
+ ctx.strokeStyle = '#558888';
+ //alert('storkers');
+ var scale = 0.3;
+ for (var y = y0; y <= y1; y += dy) {
+  //alert('@@&21111');
+  for (var x = x0; x <= x1; x += dx) {
+   //for (var z = z0; z <= z1; z += dz) {
+    var z = 0;
+    var position = new Vector(x, y, z);
+    //alert('$$&@&$');
+    var v = field(position);
+    var xy = screenOrtho(position);
+    var ovx = v.x * screenScale.x * scale;
+    var ovy = v.y * screenScale.y * scale;
+    if (ovx * ovx + ovy * ovy > 1500)
+     continue;
+    //alert([xy.x, xy.y, ovx, ovy]);
+    drawArrow(ctx, xy.x, xy.y, ovx, ovy);
+    //alert('$&3___3');
+   //}
+  }
+ }
+ //alert('rendfieldone');
+}
+
+var world = new Array();
+var worldOnce = false;
+
+/**** world selectors ****/
+function world1() {
+world[0] = new Ball(new Vector(0, 0, 0), new Vector(0, 0, 0), 1000);
+world[1] = new Ball(new Vector(10, 0, 0), new Vector(0, 9, 0), 0);
+world[2] = new Ball(new Vector(0, 20, 0), new Vector(-4.5, 0, 0), 0);
+}
+
+function world2() {
+worldOnce = true;
+world[0] = new Ball(new Vector(18, 0, 0), new Vector(0, 0, 0), 1000);
+world[1] = new Ball(new Vector(-18, 0, 0), new Vector(0, 0, 0), -250);
+}
+
+function world3() {
+world[0] = new Ball(new Vector(0, 0, 0), new Vector(2, 0, 0), 1800);
+world[1] = new Ball(new Vector(0, 18, 0), new Vector(-9, 0, 0), 400);
+world[2] = new Ball(new Vector(2, 18, 0), new Vector(-9, 13, 0), 0);
+}
+
+function world4() {
+worldOnce = true;
+world[0] = new Ball(new Vector(20, 0, 0), new Vector(0, 0, 0), 800);
+world[1] = new Ball(new Vector(-20, 0, 0), new Vector(0, 0, 0), -800);
+}
+
+world4(); /* select here */
+/*************************/
+
+//var ball = world[0];/**/
+
+/*var ball = new Ball(new Vector(10, 0, 0), new Vector(0, 3, 0));*/
+
+var dteInterval = 0.02;
+var renderFieldInterval = 0.1;
+var renderFieldClock = 0;
+//var gravityVector = new Vector(0, -1, 0);
+
+function awlg(message) {
+ //document.write(message);
+ //console.log(message);
+ alert(message);
+}
+
+//awlg('dbgmdok');
+
+function coolFunction(distant) {
+ var distanceSquared = distant.dotProduct(distant);
+ if (distanceSquared <= 0.00001)
+  return zeroVector();
+ var distanceCubed = distanceSquared * Math.sqrt(distanceSquared);
+ return distant.divide(distanceCubed);
+}
+
+function getFieldAt(position, excluded) {
+ var acceleration = zeroVector();
+ for (var i in world) {
+  if (i === excluded)
+   continue;
+  var other = world[i];
+  if (other.mass === 0)
+   continue;
+  var distant = other.position.subtract(position);
+  var accOnce = coolFunction(distant);
+  accOnce.multiplyUp(other.mass);
+  acceleration.addUp(accOnce);
+  //awlg([i, j, acceleration]);
+ }
+ return acceleration;
+}
+
+function dteMain() {
+
+ //ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
+ ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+ ctx.fillRect(0, 0, screenX, screenY);
+
+ timePassed = dteInterval;
+
+ for (var i in world) {
+  var ball = world[i];
+  ball.render(ctx);
+  ball.moveByTime(timePassed);
+  var acceleration = getFieldAt(ball.position, i);
+  ball.accelerateByTime(timePassed, acceleration);
+ }
+
+ var scax = 35;
+ var scay = 35;
+ if ((renderFieldClock -= timePassed) <= 0) {
+  renderField(ctx, getFieldAt, -scax, -scay, 0, scax, scay, 0, 5, 5, 100);
+  renderFieldClock = renderFieldInterval;
+ }
+}
+
+if (worldOnce)
+ dteMain();
+else
+ setInterval(dteMain, dteInterval);
+
+    </script>
+	
+  </body> 
+</html>		
