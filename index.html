@@ -149,6 +149,12 @@ function screenOrtho(position) {
  return {x: x, y: y};
 }
 
+function screenUnortho(position) {
+ var x = (position.x - screenX / 2) / screenScale.x;
+ var y = (position.y - screenY / 2) / screenScale.y;
+ return new Vector(x, y, 0);
+}
+
 Ball.prototype.render = function(ctx) {
  var xy = screenOrtho(this.position);
  ctx.fillStyle = '#FF8800';
@@ -281,6 +287,30 @@ function dteMain() {
   renderFieldClock = renderFieldInterval;
  }
 }
+
+function getMouse(e) {
+ if (e.layerX || e.layerX == 0) { // Firefox 
+  e.target.style.position = 'relative';
+  return {x: e.layerX, y: e.layerY};
+ } else {
+   return {x: e.offsetX, y: e.offsetY};
+ }
+}
+		
+		var lastMouse;
+		
+		box.onmousemove = function(e) {
+			var mouse = getMouse(e);
+			var position = screenUnortho(mouse);
+			var velocity = zeroVector();
+			if (lastMouse !== undefined) {
+				var lastPosition = screenUnortho(lastMouse);
+				velocity = position.subtract(lastPosition).multiply(2);
+			}
+			var mass = 100;
+			var ball = new Ball(position, velocity, mass);
+			world.push(ball);
+		}
 
 if (worldOnce)
  dteMain();
