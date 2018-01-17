@@ -20,7 +20,11 @@
 		  您的浏览器未支持HTML5 canvas控件
     </canvas>
     
+    <span>质量：</span>
     <div id="slideMass"></div>
+    
+    <span>速度/率：</span>
+    <div id="slideSpeed"></div>
     
     <script>
 function Vector(x, y, z) {
@@ -289,8 +293,8 @@ function dteMain() {
  }
 }
 
-
-		var slideMass = 0;
+    var slideMass = 0;
+    var slideSpeed = 1;
     var lastMouse;
     
     function getMouse(e) {
@@ -314,7 +318,8 @@ function dteMain() {
       
       if (lastMouse !== undefined) {
         var lastPosition = screenUnortho(lastMouse);
-        velocity = position.subtract(lastPosition).multiply(2);
+        var speed = slideSpeed;
+        velocity = position.subtract(lastPosition).multiply(speed);
       }
       
       var mass = slideMass;
@@ -343,8 +348,18 @@ else
           slideMass = $(this).slider("value");
         },
       });
+      $("#slideSpeed").slider({
+        orientation: "horizontal",
+        range: "min",
+        max: 4,
+        value: slideSpeed,
+        //slide: refreshSwatch,
+        change: function() {
+          slideSpeed = $(this).slider("value");
+        },
+      });
     });
-    
+                                                                                                                    
     </script>
 	
   </body> 
