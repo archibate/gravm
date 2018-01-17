@@ -306,7 +306,7 @@ function getMouse(e) {
 				velocity = position.subtract(lastPosition).multiply(2);
 			}
 			
-			var mass = 100;
+			var mass = 0;
 			
 			var ball = new Ball(position, velocity, mass);
 			world.push(ball);
