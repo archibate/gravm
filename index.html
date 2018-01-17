@@ -1,17 +1,26 @@
 <!DOCTYPE html>
-<html>
+<html lang="ch">
   <head>
     <meta charset="utf-8">
+    <title>引力学数值模拟</title>
+    <!--link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+    <script src="//code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+    <link rel="stylesheet" href="http://jqueryui.com/resources/demos/style.css"-->
+    <!--script src=”http://libs.baidu.com/jquery/2.1.1/jquery.min.js”></script-->
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
   </head>
   <body>
     
-    <h1>引力数值模拟</h1>
+    <h1>引力学数值模拟</h1>
     
     <p>我儿子又在看我编程了</p>
 	    
     <canvas id="box" width="400" height="400" style="border: 1px solid #000000">
 		  您的浏览器未支持HTML5 canvas控件
     </canvas>
+    
+    <div id="slideMass"></div>
     
     <script>
 function Vector(x, y, z) {
@@ -93,7 +102,7 @@ function zeroVector() {
  return new Vector(0, 0, 0);
 }
 
-</script><script>
+    </script><script>
 
 function Ball(position, velocity, mass) {
  this.position = position;
@@ -116,7 +125,7 @@ Ball.prototype = {
  },
 };
 
-</script><script>
+    </script><script>
 
 function fillCircle(ctx, x, y, r) {
  ctx.beginPath();
@@ -133,7 +142,7 @@ function drawArrow(ctx, x0, y0, dx, dy) {
  ctx.stroke();
 }
 
-</script><script>
+    </script><script>
 
 var box = document.getElementById('box');
 var ctx = box.getContext('2d');
@@ -280,45 +289,62 @@ function dteMain() {
  }
 }
 
-function getMouse(e) {
- if (e.layerX || e.layerX == 0) { // Firefox 
-  e.target.style.position = 'relative';
-  return {x: e.layerX, y: e.layerY};
- } else {
-   return {x: e.offsetX, y: e.offsetY};
- }
-}
-		
-		var lastMouse;
-		
-		box.onmousedown = function(e) {
-			lastMouse = getMouse(e);
-		};
-		
-		box.onmouseup = function(e) {
-			var mouse = getMouse(e);
-			
-			var position = screenUnortho(mouse);
-			var velocity = zeroVector();
-			
-			if (lastMouse !== undefined) {
-				var lastPosition = screenUnortho(lastMouse);
-				velocity = position.subtract(lastPosition).multiply(2);
-			}
-			
-			var mass = 0;
-			
-			var ball = new Ball(position, velocity, mass);
-			world.push(ball);
-			
-			lastMouse = undefined;
-		};
+
+		var slideMass = 0;
+    var lastMouse;
+    
+    function getMouse(e) {
+      if (e.layerX || e.layerX == 0) { // Firefox 
+        e.target.style.position = 'relative';
+        return {x: e.layerX, y: e.layerY};
+      } else {
+        return {x: e.offsetX, y: e.offsetY};
+      }
+    }
+    
+    box.onmousedown = function(e) {
+      lastMouse = getMouse(e);
+    };
+    
+    box.onmouseup = function(e) {
+      var mouse = getMouse(e);
+      
+      var position = screenUnortho(mouse);
+      var velocity = zeroVector();
+      
+      if (lastMouse !== undefined) {
+        var lastPosition = screenUnortho(lastMouse);
+        velocity = position.subtract(lastPosition).multiply(2);
+      }
+      
+      var mass = slideMass;
+      
+      var ball = new Ball(position, velocity, mass);
+      world.push(ball);
+      
+      lastMouse = undefined;
+    };
 
 if (worldOnce)
  dteMain();
 else
  setInterval(dteMain, dteInterval);
 
+    </script><script>
+    
+    $(function() {
+      $("#slideMass").slider({
+        orientation: "horizontal",
+        range: "min",
+        max: 1000,
+        value: slideMass,
+        //slide: refreshSwatch,
+        change: function() {
+          slideMass = $(this).slider("value");
+        },
+      });
+    });
+    
     </script>
 	
   </body> 
