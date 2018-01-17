@@ -15,15 +15,17 @@
     <h1>引力学数值模拟</h1>
     
     <p>我儿子又在看我编程了</p>
-	    
+    
     <canvas id="box" width="400" height="400" style="border: 1px solid #000000">
-		  您的浏览器未支持HTML5 canvas控件
+      您的浏览器未支持HTML5 canvas控件
     </canvas>
     
+    <br/>
     <span>质量：</span>
     <div id="slideMass"></div>
     
-    <span>速度/率：</span>
+    <br/>
+    <span>速率：</span>
     <div id="slideSpeed"></div>
     
     <script>
@@ -341,8 +343,8 @@ else
       $("#slideMass").slider({
         orientation: "horizontal",
         range: "min",
-        max: 1000,
-        value: slideMass,
+        max: 1000 + 0.0,
+        value: slideMass + 0.0,
         //slide: refreshSwatch,
         change: function() {
           slideMass = $(this).slider("value");
@@ -351,8 +353,8 @@ else
       $("#slideSpeed").slider({
         orientation: "horizontal",
         range: "min",
-        max: 4,
-        value: slideSpeed,
+        max: 5 + 0.0,
+        value: slideSpeed + 0.0,
         //slide: refreshSwatch,
         change: function() {
           slideSpeed = $(this).slider("value");
