@@ -165,28 +165,22 @@ Ball.prototype.render = function(ctx) {
 
 function renderField(ctx, field, x0, y0, z0, x1, y1, z1, dx, dy, dz) {
  ctx.strokeStyle = '#558888';
- //alert('storkers');
  var scale = 0.3;
  for (var y = y0; y <= y1; y += dy) {
-  //alert('@@&21111');
   for (var x = x0; x <= x1; x += dx) {
    //for (var z = z0; z <= z1; z += dz) {
     var z = 0;
     var position = new Vector(x, y, z);
-    //alert('$$&@&$');
     var v = field(position);
     var xy = screenOrtho(position);
     var ovx = v.x * screenScale.x * scale;
     var ovy = v.y * screenScale.y * scale;
     if (ovx * ovx + ovy * ovy > 1500)
      continue;
-    //alert([xy.x, xy.y, ovx, ovy]);
     drawArrow(ctx, xy.x, xy.y, ovx, ovy);
-    //alert('$&3___3');
    //}
   }
  }
- //alert('rendfieldone');
 }
 
 var world = new Array();
@@ -229,7 +223,6 @@ world3(); /* select here */
 var dteInterval = 0.02;
 var renderFieldInterval = 0.1;
 var renderFieldClock = 0;
-//var gravityVector = new Vector(0, -1, 0);
 
 function awlg(message) {
  //document.write(message);
@@ -259,7 +252,6 @@ function getFieldAt(position, excluded) {
   var accOnce = coolFunction(distant);
   accOnce.multiplyUp(other.mass);
   acceleration.addUp(accOnce);
-  //awlg([i, j, acceleration]);
  }
  return acceleration;
 }
@@ -299,18 +291,28 @@ function getMouse(e) {
 		
 		var lastMouse;
 		
-		box.onmousemove = function(e) {
+		box.onmousedown = function(e) {
+			lastMouse = getMouse(e);
+		};
+		
+		box.onmouseup = function(e) {
 			var mouse = getMouse(e);
+			
 			var position = screenUnortho(mouse);
 			var velocity = zeroVector();
+			
 			if (lastMouse !== undefined) {
 				var lastPosition = screenUnortho(lastMouse);
 				velocity = position.subtract(lastPosition).multiply(2);
 			}
+			
 			var mass = 100;
+			
 			var ball = new Ball(position, velocity, mass);
 			world.push(ball);
-		}
+			
+			lastMouse = undefined;
+		};
 
 if (worldOnce)
  dteMain();
