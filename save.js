@@ -11,7 +11,6 @@ function saveBall(ball) {
 }
 
 function saveWorld(world) {
-  var res = "world = new Array();\n";
   for (var i in world) {
     res += saveBall(world[i]) + "\n";
   }
