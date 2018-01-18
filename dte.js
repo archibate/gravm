@@ -1,9 +1,13 @@
+var paused = false;
 var needRenderField = false;
 var dteInterval = 0.02;
 var renderFieldInterval = 0.1;
 var renderFieldClock = 0;
 
 function dteMain() {
+ if (paused)
+  return;
+ 
  ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
  ctx.fillRect(0, 0, screenX, screenY);
 
