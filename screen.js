@@ -4,9 +4,7 @@ var ctx = box.getContext('2d');
 var screenX = box.width;
 var screenY = box.height;
 
-var worldMaxSize = {x: 80, y: 80};
-
-var screenScale = {x: box.height / worldMaxSize.y, y: -box.width / worldMaxSize.x};
+var screenScale = {x: box.height / 80, y: -box.width / 80};
 
 function screenOrtho(position) {
  var x = position.x * screenScale.x + screenX / 2;
