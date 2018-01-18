@@ -29,11 +29,11 @@
       
       $("#pushSave").button()
           .click(function() {
-          textWorld = saveWorld(world);
+          $("#textWorld").val(saveWorld(world));
       });
       
       $("#pushLoad").button()
           .click(function() {
-          world = loadWorld(textWorld);
+          world = loadWorld($("#textWorld").val());
       });
     });
