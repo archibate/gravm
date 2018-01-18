@@ -6,7 +6,7 @@ var renderFieldClock = 0;
 
 function outOfScreen(position) {
  var xy = screenOrtho(position);
- return Math.abs(xy.x) > worldMaxSize.x || Math.abs(xy.y) > worldMaxSize.y;
+ return xy.x > screenX || xy.x < 0 || xy.y < 0 || xy.y > screenY;
 }
 
 function dteMain() {
