@@ -26,4 +26,14 @@
           slideSpeed = $(this).slider("value");
         },
       });
+      
+      $("#pushSave").button()
+          .click(function() {
+          textWorld = saveWorld(world);
+      });
+      
+      $("#pushLoad").button()
+          .click(function() {
+          world = loadWorld(textWorld);
+      });
     });
