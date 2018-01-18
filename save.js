@@ -1,11 +1,19 @@
 function saveBall(ball) {
-  return "new Ball(" + ball.position.toString() + ", new Vector" + ball.velocity.toString() + ", " + ball.mass.toString());
+  return [
+    ball.position.x,
+    ball.position.y,
+    ball.position.z,
+    ball.velocity.x,
+    ball.velocity.y,
+    ball.velocity.z,
+    ball.mass,
+  ].toString();
 }
 
 function saveWorld(world) {
-  var res = "world = new Array();";
+  var res = "world = new Array();\n";
   for (var i in world) {
-    res += "world.push(" + saveBall(world[i]) + ");";
+    res += saveBall(world[i]) + "\n";
   }
   return res;
 }
