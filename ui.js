@@ -1,9 +1,8 @@
     
     $(function() {
-      $("#pushPause").button({
-        click: function() {
+      $("#pushPause").button()
+          .click(function() {
           paused = !paused;
-        },
       });
       
       $("#slideMass").slider({
