@@ -1,5 +1,11 @@
     
     $(function() {
+      $("#pushPause").button({
+        click: function() {
+          paused = !paused;
+        },
+      });
+      
       $("#slideMass").slider({
         orientation: "horizontal",
         range: "min",
@@ -10,6 +16,7 @@
           slideMass = $(this).slider("value");
         },
       });
+      
       $("#slideSpeed").slider({
         orientation: "horizontal",
         range: "min",
