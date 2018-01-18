@@ -25,6 +25,7 @@ function dteMain() {
   var acceleration = getFieldAt(ball.position, i);
   ball.accelerateByTime(timePassed, acceleration);
   if (outOfScreen(ball.position)) {
+   world.splice(i, 1);
   }
  }
 
