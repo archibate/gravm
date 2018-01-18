@@ -20,7 +20,7 @@ function saveWorld(world) {
 
 function loadBall(str) {
   var list = str.split(",");
-  return new Ball(new Vector([list[0], list[1], list[2]), new Vector([list[3], list[4], list[5]), list[6]);
+  return new Ball(new Vector(list[0], list[1], list[2]), new Vector(list[3], list[4], list[5]), list[6]);
 }
 
 function loadWorld(str) {
