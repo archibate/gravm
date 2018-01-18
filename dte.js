@@ -4,6 +4,11 @@ var dteInterval = 0.02;
 var renderFieldInterval = 0.1;
 var renderFieldClock = 0;
 
+function outOfScreen(position) {
+ var xy = screenOrtho(position);
+ return Math.abs(xy.x) > worldMaxSize.x || Math.abs(xy.y) > worldMaxSize.y;
+}
+
 function dteMain() {
  if (paused)
   return;
@@ -19,6 +24,8 @@ function dteMain() {
   ball.moveByTime(timePassed);
   var acceleration = getFieldAt(ball.position, i);
   ball.accelerateByTime(timePassed, acceleration);
+  if (outOfScreen(ball.position)) {
+  }
  }
 
  var scax = 35;
