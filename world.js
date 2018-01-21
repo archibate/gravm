@@ -1,4 +1,5 @@
 var world = new Array();
+var gravConst = 1;
 
 function coolFunction(distant) {
  var distanceSquared = distant.dotProduct(distant);
@@ -18,7 +19,7 @@ function getFieldAt(position, excluded) {
    continue;
   var distant = other.position.subtract(position);
   var accOnce = coolFunction(distant);
-  accOnce.multiplyUp(other.mass);
+  accOnce.multiplyUp(gravConst *other.mass);
   acceleration.addUp(accOnce);
  }
  return acceleration;
