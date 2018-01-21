@@ -81,6 +81,12 @@ function Neptune(){
 function Sun(){
    return new Body(0.0, 0.0, 0.0, 0.0, 0.0, 0.0, SOLAR_MASS);
 }
+
+world[0] = Sun();
+world[1] = Jupiter();
+world[2] = Saturn();
+world[3] = Uranus();
+world[4] = Neptune();
 }
 
 solarSystem(); /* select here */
