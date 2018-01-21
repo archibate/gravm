@@ -28,7 +28,7 @@ function isUndefined(x) {
 
 function loadBall(str) {
   var list = str.split(" ").map(parseFloat);
-  if (list.findIndex(isUndefined) !== -1)
+  if (list.findIndex(isUndefined) === -1)
    return new Ball(new Vector(list[0], list[1], list[2]), new Vector(list[3], list[4], list[5]), list[6]);
 }
 
