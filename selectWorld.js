@@ -82,11 +82,7 @@ function Sun(){
    return newBody(0.0, 0.0, 0.0, 0.0, 0.0, 0.0, SOLAR_MASS);
 }
 
-world[0] = Sun();
-world[1] = Jupiter();
-world[2] = Saturn();
-world[3] = Uranus();
-world[4] = Neptune();
+world = new Array(Sun(), Jupiter(), Saturn(), Uranus(), Neptune());
 }
 
 solarSystem(); /* select here */
