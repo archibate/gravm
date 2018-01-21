@@ -36,4 +36,9 @@
           .click(function() {
           world = loadWorld($("#textWorld").val());
       });
+        
+      $("#pushSwitch").button()
+          .click(function() {
+          gravConst = -gravConst;
+      });
     });
