@@ -1,5 +1,5 @@
 var world = new Array();
-var gravConst = 1;
+var gravConst = -1;
 
 function coolFunction(distant) {
  var distanceSquared = distant.dotProduct(distant);
