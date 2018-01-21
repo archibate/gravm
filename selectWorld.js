@@ -26,12 +26,12 @@ var PI = 3.141592653589793;
 var SOLAR_MASS = 4 * PI * PI;
 var DAYS_PER_YEAR = 365.24;
 
-function Body(x, y, z, u, v, w, m) {
-  return Ball(new Vector(x, y, z), new Vector(u, v, w), m);
+function newBody(x, y, z, u, v, w, m) {
+  return new Ball(new Vector(x, y, z), new Vector(u, v, w), m);
 }
 
 function Jupiter(){
-   return new Body(
+   return newBody(
       4.84143144246472090e+00,
       -1.16032004402742839e+00,
       -1.03622044471123109e-01,
@@ -43,7 +43,7 @@ function Jupiter(){
 }
 
 function Saturn(){
-   return new Body(
+   return newBody(
       8.34336671824457987e+00,
       4.12479856412430479e+00,
       -4.03523417114321381e-01,
@@ -55,7 +55,7 @@ function Saturn(){
 }
 
 function Uranus(){
-   return new Body(
+   return newBody(
       1.28943695621391310e+01,
       -1.51111514016986312e+01,
       -2.23307578892655734e-01,
@@ -67,7 +67,7 @@ function Uranus(){
 }
 
 function Neptune(){
-   return new Body(
+   return newBody(
       1.53796971148509165e+01,
       -2.59193146099879641e+01,
       1.79258772950371181e-01,
@@ -79,7 +79,7 @@ function Neptune(){
 }
 
 function Sun(){
-   return new Body(0.0, 0.0, 0.0, 0.0, 0.0, 0.0, SOLAR_MASS);
+   return newBody(0.0, 0.0, 0.0, 0.0, 0.0, 0.0, SOLAR_MASS);
 }
 
 world[0] = Sun();
