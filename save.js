@@ -12,22 +12,30 @@ function saveBall(ball) {
 
 function saveWorld(world) {
   var res = "";
-  for (var i in world) {
-    res += saveBall(world[i]) + "\n";
-  }
+  world.forEach(function(ball) {
+    res += saveBall(ball) + "\n";
+  });
   return res;
+}
+
+function isDefined(x) {
+  return x !== undefined;
+}
+
+function isUndefined(x) {
+  return x === undefined;
 }
 
 function loadBall(str) {
   var list = str.split(" ").map(parseFloat);
+  if (list.find(isUndefined) !== undefined)
+   return undefined;
   return new Ball(new Vector(list[0], list[1], list[2]), new Vector(list[3], list[4], list[5]), list[6]);
 }
 
 function loadWorld(str) {
   var list = str.split("\n");
   var world = new Array(list.length);
-  for (var i in list) {
-    world[i] = loadBall(list[i]);
-  }
+  world = list.map(loadBall).filiter(isDefined);
   return world;
 }
