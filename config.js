@@ -1,4 +1,4 @@
-var accType = 'elec';
+var accType = 'grav';
 var world = new Array(); // TODO: why here?
 var paused = false; // TODO: state.js might be better
 var needRenderField = false;
