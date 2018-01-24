@@ -35,7 +35,7 @@ function setupInputSlide(suffix, val0, max, parser, set, convert, unconvert) {
       setupInputSlide("Mass", 0, 1000, parseFloat, function(value) {
             inputMass = value;
       }, function(val) {
-            return val;
+            return val; // exp and log here better?
       }, function(value) {
             return value;
       });
