@@ -9,7 +9,7 @@
         orientation: "horizontal",
         range: "min",
         max: 1000,
-        value: slideMass,
+        value: inputMass,
         change: function() {
           inputMass = $(this).slider("value");
           $("#inputMass").val(inputMass);
