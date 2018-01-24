@@ -1,6 +1,6 @@
 var accType = 'elec';
 var world = new Array(); // TODO: why here?
-var paused = true; // TODO: to put iin state.js might be better
+var paused = false; // TODO: to put iin state.js might be better
 var needRenderField = false;
 var dteInterval = 0.02;
 var renderFieldInterval = 0.1;
