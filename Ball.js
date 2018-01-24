@@ -12,7 +12,7 @@ function calcBallColor(qdm) {
  return 'rgb' + rgb.toString();*/
  var r = 0xFF * factor + 0x88 * (1 - factor);
  var g = 0x88 * factor + 0xFF * (1 - factor);
- return 'rgb(' + r.toInteger() + ',' + g.toInteger() + ',0)';
+ return 'rgb(' + Math.round(r) + ',' + Math.round(g) + ',0)';
 }
 
 function Ball(position, velocity, mass, quantity) {
