@@ -30,7 +30,7 @@
         max: 5,
         value: inputSpeed,
         change: function() {
-          slideSpeed = $(this).slider("value");
+          inputSpeed = $(this).slider("value");
           $("#inputSpeed").val(inputSpeed);
         },
       });
