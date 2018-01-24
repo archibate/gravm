@@ -18,7 +18,7 @@ function getFieldAt(position, excluded) {
    continue;
   var distant = other.position.subtract(position);
   var accOnce = coolFunction(distant);
-  accOnce.multiplyUp(other);
+  accOnce.multiplyUp(other.mass);
   acceleration.addUp(accOnce);
  }
  return acceleration;
