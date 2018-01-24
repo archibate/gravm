@@ -19,4 +19,10 @@ Ball.prototype = {
  accelerateByTime: function(timePassed, acceleration) {
   this.velocity.addUp(acceleration.multiply(timePassed));
  },
+ accByTime: function(timePassed, acc) {
+  if (this.mass == 0)
+   console.log("Error: Ball mass cannot be zero");
+  else
+   this.acelerationByTime(this.quantity / this.mass);
+ },
 };
