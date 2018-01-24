@@ -1,5 +1,5 @@
 
-function setupInputSlide(suffix, value0, max, parser, set) {
+function setupInputSlide(suffix, value0, max, parser, set, convert, unconvert) {
       var input = $("#input" + suffix);
       var slide = $("#slide" + suffix);
       
@@ -9,7 +9,7 @@ function setupInputSlide(suffix, value0, max, parser, set) {
         max: max,
         value: value0,
         change: function() {
-          var value = $(this).slider("value");
+          var value = convert($(this).slider("value"));
           input.val(value.toString())
               .attr("value", value.toString());
           set(value);
@@ -20,7 +20,7 @@ function setupInputSlide(suffix, value0, max, parser, set) {
           .attr("value", value0.toString())
           .change(function() {
           var value = parser($(this).val());
-          slide.slider("value", value);
+          slide.slider("value", unconvert(value));
           set(value);
       });
 }
@@ -32,14 +32,24 @@ function setupInputSlide(suffix, value0, max, parser, set) {
       });
       
       setupInputSlide("Mass", 0, 1000, parseFloat, function(value) {
-          inputMass = value;
+            inputMass = value;
+      }, function(val) {
+            return val;
+      }, function(value) {
+            return value;
       });
+
       if (accType == 'elec')
-       setupInputSlide("Quantity", 0, 1000, parseFloat, function(value) {
-           inputQuantity = value;
+       setupInputSlide("Quantity", 1000, 2000, parseFloat, function(value) {
+             inputQuantity = value;
+       }, function(val) {
+             return (val - 1000) * 2;
+       }, function(value) {
+             return value / 2 + 1000;
        });
+
       setupInputSlide("Speed", 0, 5, parseFloat, function(value) {
-          inputSpeed = value;
+            inputSpeed = value;
       });
       
       /*$("#pushSave").button().click(function() {
