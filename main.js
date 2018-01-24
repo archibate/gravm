@@ -1,6 +1,6 @@
 
-    var slideMass = 0;
-    var slideSpeed = 1;
+    var inputMass = 0;
+    var inputSpeed = 1;
     var lastMouse;
     
     function getMouse(e) {
@@ -24,11 +24,11 @@
       
       if (lastMouse !== undefined) {
         var lastPosition = screenUnortho(lastMouse);
-        var speed = slideSpeed;
+        var speed = inputSpeed;
         velocity = position.subtract(lastPosition).multiply(speed);
       }
       
-      var mass = slideMass;
+      var mass = inputMass;
       
       var ball = new Ball(position, velocity, mass);
       world.push(ball);
