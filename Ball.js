@@ -32,7 +32,7 @@ Ball.prototype = {
  }[accType],
  getAccMultiplier: {
   'elec': function() {
-   return this.quantity;
+   return -this.quantity; // or consider 'grav' to minus better? (if so, notice to change world.js too!)
   },
   'grav': function() {
    return this.mass;
