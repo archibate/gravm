@@ -22,8 +22,8 @@ function dteMain() {
   var ball = world[i];
   ball.render(ctx);
   ball.moveByTime(timePassed);
-  var acceleration = getFieldAt(ball.position, i);
-  ball.accelerateByTime(timePassed, acceleration);
+  var acc = getFieldAt(ball.position, i);
+  ball.accByTime(timePassed, acc);
   if (outOfScreen(ball.position)) {
    world.splice(i, 1);
   }
