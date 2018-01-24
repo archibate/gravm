@@ -1,6 +1,4 @@
 
-    var inputMass = 0;
-    var inputSpeed = 1;
     var lastMouse;
     
     function getMouse(e) {
