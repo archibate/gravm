@@ -48,8 +48,12 @@ function setupInputSlide(suffix, value0, max, parser, set, convert, unconvert) {
              return value / 2 + 1000;
        });
 
-      setupInputSlide("Speed", 0, 5, parseFloat, function(value) {
+      setupInputSlide("Speed", 0, 1000, parseFloat, function(value) {
             inputSpeed = value;
+      }, function(val) {
+            return val / 250;
+      }, function(value) {
+            return value * 250;
       });
       
       /*$("#pushSave").button().click(function() {
