@@ -16,7 +16,7 @@ function Ball(position, velocity, mass, quantity) {
  this.position = position;
  this.velocity = velocity;
  this.mass = mass;
- this.quantity = quantity; // TODO: apply color to different quantity sign
+ this.quantity = quantity;
  this.radius = calcBallSize(Math.abs(mass));
  this.color = calcBallColor(quantity);
 }
