@@ -5,7 +5,7 @@ world[1] = new Ball(new Vector(10, 0, 0), new Vector(0, 9, 0), 0);
 world[2] = new Ball(new Vector(0, 20, 0), new Vector(-4.5, 0, 0), 0);
 }
 
-function world2() {
+function world2() {needRenderField = true;
 world[0] = new Ball(new Vector(18, 0, 0), new Vector(0, 0, 0), 1000, 1000);
 world[1] = new Ball(new Vector(-18, 0, 0), new Vector(0, 0, 0), 1000, -250);
 }
@@ -85,5 +85,5 @@ function Sun(){
 world = new Array(Sun(), Jupiter(), Saturn(), Uranus(), Neptune());
 }
 
-solarSystem(); /* select here */
+world2(); /* select here */
 /*************************/
