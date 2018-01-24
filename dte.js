@@ -1,9 +1,3 @@
-var paused = false;
-var needRenderField = false;
-var dteInterval = 0.02;
-var renderFieldInterval = 0.1;
-var renderFieldClock = 0;
-
 function outOfScreen(position) {
  var xy = screenOrtho(position);
  return xy.x > screenX || xy.x < 0 || xy.y < 0 || xy.y > screenY;
