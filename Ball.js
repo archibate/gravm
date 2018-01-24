@@ -1,4 +1,3 @@
-
 function Ball(position, velocity, mass, quantity) {
  this.position = position;
  this.velocity = velocity;
@@ -19,7 +18,24 @@ Ball.prototype = {
  accelerateByTime: function(timePassed, acceleration) {
   this.velocity.addUp(acceleration.multiply(timePassed));
  },
- accByTime: function(timePassed, acc) {
-  this.accelerateByTime(timePassed, acc);
- },
+ accByTime: {
+  'elec': function(timePassed, acc) {
+   //if (this.mass == 0) {
+   // console.log("Error: Ball mass cannot be zero");
+   // return;
+   //}
+   this.accelerationByTime(this.quantity / this.mass);
+  },
+  'grav': function(timePassed, acc) {
+   this.accelerateByTime(timePassed, acc);
+  },
+ }[accType],
+ getAccMultiplier: {
+  'elec': function() {
+   return -this.quantity; // or consider 'grav' to minus better? (if so, notice to change world.js too!)
+  },
+  'grav': function() {
+   return this.mass;
+  },
+ }[accType],
 };
