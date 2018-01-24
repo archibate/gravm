@@ -34,9 +34,6 @@ function setupInputSlide(suffix, value0, max, parser, set) {
       setupInputSlide("Mass", 0, 1000, parseFloat, function(value) {
           inputMass = value;
       });
-      setupInputSlide("Quantity", 0, 1000, parseFloat, function(value) {
-          inputQuantity = value;
-      });
       setupInputSlide("Speed", 0, 5, parseFloat, function(value) {
           inputSpeed = value;
       });
