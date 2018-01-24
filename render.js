@@ -1,8 +1,9 @@
 
 Ball.prototype.render = function(ctx) {
  var xy = screenOrtho(this.position);
- ctx.fillStyle = '#FF8800';
- ctx.strokeStyle = '#AA5500';
+ //ctx.fillStyle = '#FF8800';
+ //ctx.strokeStyle = '#AA5500';
+ ctx.fillStyle = ctx.strokeStyle = this.color;
  var radius = this.radius;
  fillCircle(ctx, xy.x, xy.y, radius);
 }
