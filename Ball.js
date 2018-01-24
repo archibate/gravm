@@ -24,7 +24,7 @@ Ball.prototype = {
    // console.log("Error: Ball mass cannot be zero");
    // return;
    //}
-   this.accelerateByTime(this.quantity / this.mass);
+   this.accelerateByTime(timePassed, this.quantity / this.mass);
   },
   'grav': function(timePassed, acc) {
    this.accelerateByTime(timePassed, acc);
@@ -32,7 +32,7 @@ Ball.prototype = {
  }[accType],
  getAccMultiplier: {
   'elec': function() {
-   return -this.quantity; // or consider 'grav' to minus better? (if so, notice to change world.js too!)
+   return -this.quantity; // or consider 'grav' to be minus better? (if so, don't forget to change world.js too!)
   },
   'grav': function() {
    return this.mass;
