@@ -7,7 +7,7 @@ function calcBallSize(mass) {
 }
 
 function calcBallColor(quantity) {
- var factor = 0.5 + Math.atan(quantity) * 0.63662;
+ var factor = 0.5 + Math.atan(quantity) * 0.3183;
  var rgb = new Vector(0xFF, 0x88, 0x00).multiply(factor).add(new Vector(0x88, 0xFF, 0x00).multiply(1 - factor));
  return 'rgb' + rgb.divide(256).toString();
 }
