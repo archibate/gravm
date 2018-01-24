@@ -29,9 +29,8 @@
       }
       
       var mass = inputMass;
-      var quantity = inputQuantity;
       
-      var ball = new Ball(position, velocity, mass, quantity);
+      var ball = new Ball(position, velocity, mass);
       world.push(ball);
       
       lastMouse = undefined;
