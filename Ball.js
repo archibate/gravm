@@ -24,7 +24,7 @@ Ball.prototype = {
    // console.log("Error: Ball mass cannot be zero");
    // return;
    //}
-   this.accelerationByTime(this.quantity / this.mass);
+   this.accelerateByTime(this.quantity / this.mass);
   },
   'grav': function(timePassed, acc) {
    this.accelerateByTime(timePassed, acc);
