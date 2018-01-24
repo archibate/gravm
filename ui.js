@@ -10,9 +10,17 @@
         range: "min",
         max: 1000,
         value: slideMass,
-        //slide: refreshSwatch,
         change: function() {
-          slideMass = $(this).slider("value");
+          inputMass = $(this).slider("value");
+          $("#inputMass").val(inputMass);
+        },
+      });
+      
+      $("#inputMass").input({
+        value: inputMass,
+        change: function() {
+          inputMass = $(this).val();
+          $("#slideMass").slider("value", inputMass);
         },
       });
       
@@ -20,10 +28,18 @@
         orientation: "horizontal",
         range: "min",
         max: 5,
-        value: slideSpeed,
-        //slide: refreshSwatch,
+        value: inputSpeed,
         change: function() {
           slideSpeed = $(this).slider("value");
+          $("#inputSpeed").val(inputSpeed);
+        },
+      });
+      
+      $("#inputSpeed").input({
+        value: inputSpeed,
+        change: function() {
+          inputSpeed = $(this).val();
+          $("#slideSpeed").slider("value", inputSpeed);
         },
       });
       
@@ -35,10 +51,5 @@
       $("#pushLoad").button()
           .click(function() {
           world = loadWorld($("#textWorld").val());
-      });
-        
-      $("#pushSwitch").button()
-          .click(function() {
-          gravConst = -gravConst;
       });
     });
