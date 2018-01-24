@@ -1,5 +1,5 @@
 
-function setupInputSlide(suffix, value0, max, parser, set, convert, unconvert) {
+function setupInputSlide(suffix, val0, max, parser, set, convert, unconvert) {
       var input = $("#input" + suffix);
       var slide = $("#slide" + suffix);
       
@@ -7,7 +7,7 @@ function setupInputSlide(suffix, value0, max, parser, set, convert, unconvert) {
         orientation: "horizontal",
         range: "min",
         max: max,
-        value: value0,
+        value: val0,
         change: function() {
           var value = convert($(this).slider("value"));
           input.val(value.toString())
@@ -16,6 +16,7 @@ function setupInputSlide(suffix, value0, max, parser, set, convert, unconvert) {
         },
       });
       
+      var value0 = convert(val0);
       input.val(value0.toString())
           .attr("value", value0.toString())
           .change(function() {
