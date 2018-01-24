@@ -9,7 +9,7 @@ function setupInputSlide(suffix, value0, max, parser, set) {
         max: max,
         value: value0,
         change: function() {
-          var value = $(this).slider("value"));
+          var value = $(this).slider("value");
           input.val(value.toString())
               .attr("value", value.toString());
           set(value);
