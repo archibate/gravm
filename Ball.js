@@ -18,7 +18,7 @@ Ball.prototype = {
  accelerateByTime: function(timePassed, acceleration) {
   this.velocity.addUp(acceleration.multiply(timePassed));
  },
- accByTime: { // or consider a getForceMultiplier returns this.quantity / this.mass to be better?
+ accByTime: { // or consider a getForceMultiplier returns this.quantity / this.mass to be better??
   'elec': function(timePassed, acc) {
    //if (this.mass == 0) {
    // console.log("Error: Ball mass cannot be zero");
