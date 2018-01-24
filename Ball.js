@@ -3,7 +3,7 @@ function calcBallSize(mass) {
   mass = Math.log(mass);
  else
   mass = 0;
- this.radius = 1 + 0.15 * mass * Math.sqrt(mass);
+ return 1 + 0.15 * mass * Math.sqrt(mass);
 }
 
 function calcBallColor(quantity) {
