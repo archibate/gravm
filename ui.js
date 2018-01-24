@@ -12,7 +12,7 @@
         value: inputMass,
         change: function() {
           inputMass = $(this).slider("value");
-          $("#inputMass").val(inputMass.toString());
+          $("#inputMass").attr("value", inputMass.toString());
         },
       });
       
@@ -28,7 +28,7 @@
         value: inputSpeed,
         change: function() {
           inputSpeed = $(this).slider("value");
-          $("#inputSpeed").val(inputSpeed.toString());
+          $("#inputSpeed").attr("value", inputSpeed.toString());
         },
       });
       
