@@ -1,14 +1,24 @@
-function Ball(position, velocity, mass, quantity) {
- this.position = position;
- this.velocity = velocity;
- this.mass = mass;
- this.quantity = quantity; // TODO: apply color to different quantity sign
- mass = Math.abs(mass);
+function calcBallSize(mass) {
  if (mass > 1)
   mass = Math.log(mass);
  else
   mass = 0;
  this.radius = 1 + 0.15 * mass * Math.sqrt(mass);
+}
+
+function calcBallColor(quantity) {
+ var factor = 0.5 + Math.atan(quantity) * 0.63662;
+ var rgb = new Vector(0xFF, 0x88, 0x00).multiply(factor).add(new Vector(0x88, 0xFF, 0x00).multiply(1 - factor));
+ return 'rgb' + rgb.divide(256).toString();
+}
+
+function Ball(position, velocity, mass, quantity) {
+ this.position = position;
+ this.velocity = velocity;
+ this.mass = mass;
+ this.quantity = quantity; // TODO: apply color to different quantity sign
+ this.radius = calcBallSize(Math.abs(mass));
+ this.color = calcBallColor(quantity);
 }
 
 Ball.prototype = {
