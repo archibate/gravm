@@ -19,4 +19,7 @@ Ball.prototype = {
  accelerateByTime: function(timePassed, acceleration) {
   this.velocity.addUp(acceleration.multiply(timePassed));
  },
+ accByTime: function(timePassed, acc) {
+  this.accelerateByTime(timePassed, acc);
+ },
 };
