@@ -6,8 +6,8 @@ function calcBallSize(mass) {
  return 1 + 0.15 * mass * Math.sqrt(mass);
 }
 
-function calcBallColor(quantity) {
- var factor = 0.5 + Math.atan(quantity) * 0.3183;
+function calcBallColor(qdm) {
+ var factor = 0.5 + Math.atan(qdm) * 0.3183;
  /*var rgb = new Vector(0xFF, 0x88, 0x00).multiply(factor).add(new Vector(0x88, 0xFF, 0x00).multiply(1 - factor));
  return 'rgb' + rgb.toString();*/
  var r = 0xFF * factor + 0x88 * (1 - factor);
@@ -21,7 +21,7 @@ function Ball(position, velocity, mass, quantity) {
  this.mass = mass;
  this.quantity = quantity;
  this.radius = calcBallSize(Math.abs(mass)); // was that abs nessi.sary?
- this.color = calcBallColor(quantity);
+ this.color = calcBallColor(quantity / mass);
 }
 
 Ball.prototype = {
