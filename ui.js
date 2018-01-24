@@ -12,16 +12,13 @@
         value: inputMass,
         change: function() {
           inputMass = $(this).slider("value");
-          $("#inputMass").val(inputMass);
+          $("#inputMass").val(inputMass.toString());
         },
       });
       
-      $("#inputMass").input({
-        value: inputMass,
-        change: function() {
-          inputMass = $(this).val();
+      $("#inputMass").val(inputMass).change(function() {
+          inputMass = parseFloat($(this).val());
           $("#slideMass").slider("value", inputMass);
-        },
       });
       
       $("#slideSpeed").slider({
@@ -31,25 +28,20 @@
         value: inputSpeed,
         change: function() {
           inputSpeed = $(this).slider("value");
-          $("#inputSpeed").val(inputSpeed);
+          $("#inputSpeed").val(inputSpeed.toString());
         },
       });
       
-      $("#inputSpeed").input({
-        value: inputSpeed,
-        change: function() {
-          inputSpeed = $(this).val();
+      $("#inputSpeed").val(inputSpeed).change(function() {
+          inputSpeed = parseFloat($(this).val());
           $("#slideSpeed").slider("value", inputSpeed);
-        },
       });
       
-      /*$("#pushSave").button()
-          .click(function() {
+      /*$("#pushSave").button().click(function() {
           $("#textWorld").val(saveWorld(world));
       });
       
-      $("#pushLoad").button()
-          .click(function() {
+      $("#pushLoad").button().click(function() {
           world = loadWorld($("#textWorld").val());
       });*/
     });
