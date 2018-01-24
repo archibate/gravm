@@ -1,4 +1,3 @@
-
 function Ball(position, velocity, mass, quantity) {
  this.position = position;
  this.velocity = velocity;
