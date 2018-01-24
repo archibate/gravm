@@ -1,6 +1,6 @@
 var accType = 'grav';
 var world = new Array(); // TODO: why here?
-var paused = false; // TODO: state.js might be better
+var paused = true; // TODO: to put iin state.js might be better
 var needRenderField = false;
 var dteInterval = 0.02;
 var renderFieldInterval = 0.1;
