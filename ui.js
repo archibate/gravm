@@ -43,7 +43,7 @@
         },
       });
       
-      $("#pushSave").button()
+      /*$("#pushSave").button()
           .click(function() {
           $("#textWorld").val(saveWorld(world));
       });
@@ -51,5 +51,5 @@
       $("#pushLoad").button()
           .click(function() {
           world = loadWorld($("#textWorld").val());
-      });
+      });*/
     });
