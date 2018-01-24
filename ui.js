@@ -1,42 +1,44 @@
-    
+
+function setupInputSlide(suffix, value0, max, parser, set) {
+      var input = $("#input" + suffix);
+      var slide = $("#slide" + suffix);
+      
+      slide.slider({
+        orientation: "horizontal",
+        range: "min",
+        max: max,
+        value: value0,
+        change: function() {
+          var value = $(this).slider("value"));
+          input.val(value.toString())
+              .attr("value", value.toString());
+          set(value);
+        },
+      });
+      
+      input.val(value0.toString())
+          .attr("value", value0.toString())
+          .change(function() {
+          var value = parser($(this).val());
+          slide.slider("value", value);
+          set(value);
+      });
+}
+
     $(function() {
       $("#pushPause").button()
           .click(function() {
           paused = !paused;
       });
       
-      $("#slideMass").slider({
-        orientation: "horizontal",
-        range: "min",
-        max: 1000,
-        value: inputMass,
-        change: function() {
-          inputMass = $(this).slider("value");
-          $("#inputMass").val(inputMass.toString());
-          $("#inputMass").attr("value", inputMass.toString());
-        },
+      setupInputSlide("Mass", 0, 1000, parseFloat, function(value) {
+          inputMass = value;
       });
-      
-      $("#inputMass").val(inputMass).change(function() {
-          inputMass = parseFloat($(this).val());
-          $("#slideMass").slider("value", inputMass);
+      setupInputSlide("Quantity", 0, 1000, parseFloat, function(value) {
+          inputQuantity = value;
       });
-      
-      $("#slideSpeed").slider({
-        orientation: "horizontal",
-        range: "min",
-        max: 5,
-        value: inputSpeed,
-        change: function() {
-          inputSpeed = $(this).slider("value");
-          $("#inputSpeed").val(inputSpeed.toString());
-          $("#inputSpeed").attr("value", inputSpeed.toString());
-        },
-      });
-      
-      $("#inputSpeed").val(inputSpeed).change(function() {
-          inputSpeed = parseFloat($(this).val());
-          $("#slideSpeed").slider("value", inputSpeed);
+      setupInputSlide("Speed", 0, 5, parseFloat, function(value) {
+          inputSpeed = value;
       });
       
       /*$("#pushSave").button().click(function() {
