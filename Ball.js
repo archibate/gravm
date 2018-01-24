@@ -20,7 +20,7 @@ function Ball(position, velocity, mass, quantity) {
  this.velocity = velocity;
  this.mass = mass;
  this.quantity = quantity;
- this.radius = calcBallSize(Math.abs(mass)); // was that abs nessi.sary?
+ this.radius = calcBallSize(Math.abs(mass)); // was that abs necessary?
  this.color = calcBallColor(quantity / mass);
 }
 
