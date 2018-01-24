@@ -85,5 +85,5 @@ function Sun(){
 world = new Array(Sun(), Jupiter(), Saturn(), Uranus(), Neptune());
 }
 
-world2(); /* select here */
+solarSystem(); /* select here */
 /*************************/
