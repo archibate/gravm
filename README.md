@@ -1,3 +1,3 @@
-# archibate.github.io
+# gravm
 
 ### A(n) gravity/electricity emulator
